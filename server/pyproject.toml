@@ -1,0 +1,25 @@
+[project]
+name = "todo-server"
+version = "0.1.0"
+description = "Todo app API and static frontend host"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.162.0",
+  "sqlalchemy==2.1.8",
+  "alembic==1.20.1",
+  "psycopg[binary]>=3.2",
+  "uvicorn>=0.32",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "httpx2>=2",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
