@@ -6,7 +6,11 @@
   --color-primary: #1f4d3a;
   --color-primary-foreground: #ffffff;
   --color-border: #d6d3d1;
-  --color-priority-high: #9a3412;
+  --color-priority-1: #57534e;
+  --color-priority-2: #44403c;
+  --color-priority-3: #1c1917;
+  --color-priority-4: #c2410c;
+  --color-priority-5: #9a3412;
   --color-partial: #a16207;
   --color-done: #746d68;
   --color-danger: #9f1239;
@@ -219,8 +223,24 @@ textarea {
   letter-spacing: 0.01em;
 }
 
-.priority-high {
-  color: var(--color-priority-high);
+.priority-1 {
+  color: var(--color-priority-1);
+}
+
+.priority-2 {
+  color: var(--color-priority-2);
+}
+
+.priority-3 {
+  color: var(--color-priority-3);
+}
+
+.priority-4 {
+  color: var(--color-priority-4);
+}
+
+.priority-5 {
+  color: var(--color-priority-5);
 }
 
 .state-partial {
