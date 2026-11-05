@@ -19,6 +19,34 @@ test('renders a nested sub-to-do and the partial note', () => {
   expect(screen.getByText('partial')).toBeTruthy()
 })
 
+test('colors each priority numeral and tints its row', () => {
+  const { container } = render(
+    <TodoListView
+      todos={[
+        ...[1, 2, 3, 4, 5].map((priority) =>
+          todo({ id: priority, title: `Task ${priority}`, priority, position: priority }),
+        ),
+        todo({ id: 6, title: 'Finished', state: 'done', priority: 1, position: 6 }),
+        todo({ id: 7, title: 'Halfway', state: 'partial', priority: 5, position: 7 }),
+      ]}
+    />,
+  )
+  for (const priority of [1, 2, 3, 4, 5]) {
+    const numerals = screen.getAllByText(String(priority))
+    expect(numerals.length).toBeGreaterThan(0)
+    for (const numeral of numerals) {
+      expect(numeral.textContent).toBe(String(priority))
+      expect(numeral.className).toBe(`priority priority-${priority}`)
+    }
+  }
+  const rows = container.querySelectorAll('article.todo-row')
+  expect(rows.length).toBe(7)
+  for (const row of rows) {
+    const numeral = row.querySelector('.priority')
+    expect(row.classList.contains(`priority-row-${numeral?.textContent}`)).toBe(true)
+  }
+})
+
 test('keeps mixed dates in the given order', () => {
   render(
     <TodoListView

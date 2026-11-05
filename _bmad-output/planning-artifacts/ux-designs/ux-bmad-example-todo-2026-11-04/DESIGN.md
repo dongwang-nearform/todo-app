@@ -16,7 +16,16 @@ colors:
   primary: '#1F4D3A'
   primary-foreground: '#FFFFFF'
   border: '#D6D3D1'
-  priority-high: '#9A3412'
+  priority-1: '#57534E'
+  priority-2: '#44403C'
+  priority-3: '#1C1917'
+  priority-4: '#C2410C'
+  priority-5: '#9A3412'
+  priority-1-bg: '#F0F9FF'
+  priority-2-bg: '#F0FDFA'
+  priority-3-bg: '#F7FEE7'
+  priority-4-bg: '#FEFCE8'
+  priority-5-bg: '#FFF7ED'
   partial: '#A16207'
   done: '#746D68'
   danger: '#9F1239'
@@ -64,8 +73,8 @@ components:
     background: '{colors.muted}'
     foreground: '{colors.foreground}'
     radius: '{rounded.sm}'
-  priority-high:
-    foreground: '{colors.priority-high}'
+  priority-numeral:
+    foreground: '{colors.priority-1}'
     font: '{typography.label}'
   button-primary:
     background: '{colors.primary}'
@@ -111,7 +120,8 @@ Text on `{colors.background}`, and `{colors.primary-foreground}` on `{colors.pri
 - **Ink (`{colors.foreground}`)** is titles and body.
 - **Stone (`{colors.muted}`, `{colors.muted-foreground}`, `{colors.border}`)** is chrome, the Next marker, secondary text, and the alarm time.
 - **Pine (`{colors.primary}`, `{colors.primary-foreground}`)** is the one primary action on a surface. It is not used to mark a recommended to-do.
-- **High priority (`{colors.priority-high}`)** colors the numeral 5 only. A 1 uses ink.
+- **Priority (`{colors.priority-1}` to `{colors.priority-5}`)** colors the priority numeral by its value, a single-hue ramp. Priority 1 is stone, 2 is dark stone, 3 is ink, 4 and 5 are rust. The numeral is always present.
+- **Priority row (`{colors.priority-1-bg}` to `{colors.priority-5-bg}`)** fills the row. The fills are pale: cool, teal, lime, yellow, orange. They are not the numeral hexes. A wash of those hexes drops "done", "partial", and the 4 numeral under 4.5:1. The page behind the rows stays paper.
 - **Partial (`{colors.partial}`)** colors the word "partial" only. The word is always present.
 - **Done (`{colors.done}`)** colors a done row's title and the word "done". The word is always present.
 - **Danger (`{colors.danger}`)** is Delete, Delete list, and a failed write's `detail` string.
@@ -145,7 +155,7 @@ Flat. Rows have a 1px `{colors.border}` and no shadow. The editor on a wide scre
 
 **Next marker.** The text "Next" in `{components.next-marker}`, with `{spacing.2}` of horizontal padding, placed on the row whose id is `next_todo_id`. It is a label, not a fill of pine.
 
-**Priority.** The numeral 1–5. 5 uses `{components.priority-high}`. The row is not sorted by this numeral.
+**Priority.** The numeral 1–5 in `{components.priority-numeral}`, colored by value from `{colors.priority-1}` to `{colors.priority-5}`. The row background is `{colors.priority-1-bg}` through `{colors.priority-5-bg}`. The row is not sorted by this numeral, and priority adds no border or badge.
 
 **Primary button.** `{components.button-primary}`. One primary button on a surface: Save, Confirm copy, Create a list, or Add to-do while the editor is closed.
 

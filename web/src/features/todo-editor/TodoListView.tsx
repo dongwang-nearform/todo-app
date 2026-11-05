@@ -33,7 +33,7 @@ function RowBody({ todo, next }: { todo: TodoOut; next: boolean }) {
   return (
     <>
       {next ? <span className="next-marker">Next</span> : null}
-      <span className={todo.priority === 5 ? 'priority priority-high' : 'priority'}>{todo.priority}</span>
+      <span className={`priority priority-${todo.priority}`}>{todo.priority}</span>
       <span className={todo.state === 'done' ? 'todo-title is-done' : 'todo-title'}>{todo.title}</span>
       {todo.state === 'partial' ? <span className="state-partial">partial</span> : null}
       {todo.state === 'done' ? <span className="state-done">done</span> : null}
@@ -60,7 +60,7 @@ function Row({
 }) {
   return (
     <article
-      className={depth > 0 ? 'todo-row sub' : 'todo-row'}
+      className={depth > 0 ? `todo-row sub priority-row-${todo.priority}` : `todo-row priority-row-${todo.priority}`}
       style={depth > 0 ? { marginLeft: `calc(var(--space-4) * ${depth})` } : undefined}
     >
       {onOpen ? (
