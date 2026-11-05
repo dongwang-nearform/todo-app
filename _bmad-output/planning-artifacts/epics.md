@@ -24,7 +24,7 @@ This document provides the complete epic and story breakdown for bmad-example-to
 FR-1: Tom can see every to-do list he created, and a second list appears as its own list.
 FR-2: Tom can open Today and see that date's to-dos in list order, and he can identify the next to-do from that order.
 FR-3: The not-done view shows every to-do that is not done, across all time. It includes a partial to-do and a not-done to-do from another date. It excludes a done to-do.
-FR-4: Tom can open a day view, a week view, a month view, and a year view. A to-do with a time appears in the periods that contain that time, and a to-do outside the selected period does not. Where a to-do with no time appears in these views is unstated.
+FR-4: Tom can open a day view, a week view, a month view, and a year view. A to-do with a time appears in the periods that contain that time, and a to-do outside the selected period does not. A confirmed to-do with no date appears under the dated rows in a section headed "No date".
 FR-5: Tom can create a to-do, update its name, time, or priority, and delete it. A created to-do appears on the list he put it on. A deleted to-do no longer appears on any list or view.
 FR-6: Tom can mark a to-do done, and mark a done to-do not done. Done removes it from the not-done view. Not done returns it.
 FR-7: Today shows that day's to-dos in order and which one is next even when every one of them is still not done.
@@ -68,7 +68,7 @@ Starter template: yes. The spine binds TypeScript "as installed with the Vite Re
 - Views: `GET /api/views/today?on_date=` returns `{ on_date, todos, next_todo_id }`. `next_todo_id` is the first confirmed to-do that day whose state is not `done`, or null, so a partial to-do can be next. `GET /api/views/not-done` returns confirmed to-dos whose state is not `done`, including partial and no date. `GET /api/views/period?grain=&anchor=` with grain `day` | `week` | `month` | `year` returns `{ grain, anchor, todos, undated }`.
 - Copy: `POST /api/copies` with `{ source_list_id, destination_list_id, on_date }` copies every confirmed to-do on the source list, including sub-to-dos. New rows have `copy_confirmed` false and that `on_date`, and they appear in no view. `POST /api/copies/{copy_id}/confirm` sets `copy_confirmed` true. The server never creates a to-do on its own.
 - No route exists for sign-in, calendar, alarm delivery, or a progress number. FR-14 has no route.
-- Still not designed, so a story must not invent them: where `undated` is drawn on week, month, and year screens; whether an alarm scheduler exists and how early an alarm fires; which timezone "today" uses; the hosting provider.
+- Still not designed, so a story must not invent them: whether an alarm scheduler exists and how early an alarm fires; which timezone "today" uses; the hosting provider. Where `undated` is drawn is decided: a section headed "No date" under the dated rows.
 
 ### UX Design Requirements
 
@@ -79,7 +79,7 @@ No UX design contract was included. `DESIGN.md` and `EXPERIENCE.md` exist and ar
 FR-1: Epic 1, Story 1.2 — See every to-do list.
 FR-2: Epic 2, Story 2.1 — Open Today in order.
 FR-3: Epic 2, Story 2.2 — Not-done view across all time.
-FR-4: Epic 4, Story 4.1 — Day, week, month, and year views. Undated placement stays open.
+FR-4: Epic 4, Story 4.1 — Day, week, month, and year views. Undated rows render in a "No date" section under the dated rows.
 FR-5: Epic 1, Stories 1.3, 1.4, and 1.7 — Create, update, and delete a to-do.
 FR-6: Epic 1, Story 1.5, and Epic 2, Story 2.2 — Mark done and mark not done. The not-done view excludes done.
 FR-7: Epic 2, Story 2.1 — What is next while to-dos stay not done.
@@ -109,7 +109,7 @@ Tom can copy every confirmed to-do from one list onto a date, see that copy, and
 **FRs covered:** FR-15
 
 ### Epic 4: Browse a day, week, month, or year
-Tom can open each period and see the dated to-dos inside it. The payload can return undated to-dos. The screen placement of those undated rows is still open, so this epic does not invent it.
+Tom can open each period and see the dated to-dos inside it. Confirmed to-dos with no date render under those rows in a section headed "No date".
 **FRs covered:** FR-4
 
 ## Epic 1: Keep a to-do
@@ -605,13 +605,13 @@ So that a later Saturday stays empty until I copy again.
 
 ## Epic 4: Browse a day, week, month, or year
 
-Tom can open each period and see the dated to-dos inside it. The payload can return undated to-dos. The screen placement of those undated rows is still open, so this epic does not invent it.
+Tom can open each period and see the dated to-dos inside it. Confirmed to-dos with no date render under those rows in a section headed "No date".
 
 ### Story 4.1: Open a day, week, month, or year
 
 As a Tom,
 I want to open a day, a week, a month, or a year,
-So that I can see the dated to-dos in that period.
+So that I can see the dated to-dos in that period, and the to-dos with no date under them.
 
 **Requirements:** FR-4, NFR-1
 
@@ -644,8 +644,10 @@ So that I can see the dated to-dos in that period.
 
 **Given** the period screen
 **When** it renders
-**Then** it shows `todos`
-**And** it does not add a layout region for `undated`
+**Then** it shows `todos` first
+**And** under those rows it shows a section headed "No date"
+**And** that section lists `undated`
+**And** an undated to-do is not placed on a day inside the week, month, or year
 
 **Given** a missing `grain`, a `grain` outside those four, or an `anchor` that is not a date
 **When** he opens the period
@@ -654,3 +656,4 @@ So that I can see the dated to-dos in that period.
 **Given** a phone-width browser and a desktop-width browser
 **When** he opens a period on each
 **Then** both widths show the same dated to-dos
+**And** both widths show the same "No date" section

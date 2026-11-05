@@ -2,7 +2,7 @@
 title: Todo App
 status: approved
 created: 2026-11-04
-updated: 2026-11-04
+updated: 2026-11-05
 ---
 
 # Product Brief: Todo App
@@ -66,7 +66,9 @@ v1 is the confirmed set. In: more than one to-do list; Today and what is next; t
 
 Out: a native phone app, a native desktop app, a public API, hardware, accounts and sign-in, any calendar, automatic to-dos, the product choosing what is first, and a stored "quick to finish" field.
 
-Still open, and not deferred to a later version: where a to-do with no time appears in the week, month, and year views; how early an alarm fires; which list or day a weekday morning lands on. The user-facing name is still "Todo App."
+A to-do with no date appears in the day, week, month, and year views in a "No date" section under the dated rows. That placement is closed.
+
+Still open, and not deferred to a later version: how early an alarm fires; which list or day a weekday morning lands on. The user-facing name is still "Todo App."
 
 ## Vision
 
