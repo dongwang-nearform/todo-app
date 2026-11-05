@@ -83,7 +83,7 @@ FR-4: Epic 4, Story 4.1 — Day, week, month, and year views. Undated rows rende
 FR-5: Epic 1, Stories 1.3, 1.4, and 1.7 — Create, update, and delete a to-do.
 FR-6: Epic 1, Story 1.5, and Epic 2, Story 2.2 — Mark done and mark not done. The not-done view excludes done.
 FR-7: Epic 2, Story 2.1 — What is next while to-dos stay not done.
-FR-8: Epic 1, Story 1.3 — Priority 1 through 5, 5 highest.
+FR-8: Epic 1, Story 1.3 — Priority 1 through 5, 5 highest. Epic 5, Story 5.1 — Priority numeral color ramp.
 FR-9: Epic 1, Story 1.3 — Tom chooses what to do first.
 FR-10: Epic 1, Story 1.9 — Sub-to-dos.
 FR-11: Epic 1, Story 1.9 — New to-do after marking one done.
@@ -111,6 +111,10 @@ Tom can copy every confirmed to-do from one list onto a date, see that copy, and
 ### Epic 4: Browse a day, week, month, or year
 Tom can open each period and see the dated to-dos inside it. Confirmed to-dos with no date render under those rows in a section headed "No date".
 **FRs covered:** FR-4
+
+### Epic 5: Read the list at a glance
+Tom can tell each to-do's priority by the color of its numeral, on the single-hue ramp in `DESIGN.md`. Nothing else about the row changes.
+**FRs covered:** FR-8 (display), NFR-1
 
 ## Epic 1: Keep a to-do
 
@@ -657,3 +661,54 @@ So that I can see the dated to-dos in that period, and the to-dos with no date u
 **When** he opens a period on each
 **Then** both widths show the same dated to-dos
 **And** both widths show the same "No date" section
+
+## Epic 5: Read the list at a glance
+
+Tom can tell each to-do's priority by the color of its numeral, on the single-hue ramp in `DESIGN.md`. Nothing else about the row changes.
+
+### Story 5.1: Show priority as a numeral ramp
+
+As a Tom,
+I want each to-do's priority numeral colored by its value,
+So that I can tell priorities apart while scanning the list at phone width.
+
+**Requirements:** FR-8, FR-9, NFR-1
+
+**Acceptance Criteria:**
+
+**Given** a to-do with priority 1, 2, 3, 4, or 5
+**When** he views the list
+**Then** the numeral is shown
+**And** its color is `priority-1` through `priority-5` from `DESIGN.md`: #57534E, #44403C, #1C1917, #C2410C, #9A3412
+
+**Given** any priority
+**When** he views the row
+**Then** priority changes only the numeral color
+**And** the row has no priority fill, border, or badge
+**And** row order is still `position` order
+
+**Given** two not-done to-dos, one with priority 5 and one with priority 1
+**When** he views the list
+**Then** the product does not mark either one as the to-do he must do
+**And** the "Next" marker is still set only by `next_todo_id`
+
+**Given** each of the five priority colors on `{colors.background}`
+**When** the contrast is measured for 13px label text
+**Then** each meets 4.5:1
+
+**Given** a grayscale view of the list
+**When** he reads the priorities
+**Then** every numeral is still readable
+
+**Given** the old 5-only `priority-high` rule
+**When** this story ships
+**Then** that rule and its class are removed
+
+**Given** the API and the database
+**When** this story ships
+**Then** no route, schema, or validation changes
+**And** priority stays an integer from 1 through 5
+
+**Given** a phone-width browser and a desktop-width browser
+**When** he views the same list on each
+**Then** each priority shows the same numeral color on both widths

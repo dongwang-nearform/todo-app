@@ -62,3 +62,7 @@ development_status:
   epic-4: done
   4-1-open-a-day-week-month-or-year: done
   epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-show-priority-as-a-numeral-ramp: backlog
+  epic-5-retrospective: optional
