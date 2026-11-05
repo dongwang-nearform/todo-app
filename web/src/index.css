@@ -11,6 +11,11 @@
   --color-priority-3: #1c1917;
   --color-priority-4: #c2410c;
   --color-priority-5: #9a3412;
+  --color-priority-1-bg: #f0f9ff;
+  --color-priority-2-bg: #f0fdfa;
+  --color-priority-3-bg: #f7fee7;
+  --color-priority-4-bg: #fefce8;
+  --color-priority-5-bg: #fff7ed;
   --color-partial: #a16207;
   --color-done: #746d68;
   --color-danger: #9f1239;
@@ -241,6 +246,26 @@ textarea {
 
 .priority-5 {
   color: var(--color-priority-5);
+}
+
+.priority-row-1 {
+  background: var(--color-priority-1-bg);
+}
+
+.priority-row-2 {
+  background: var(--color-priority-2-bg);
+}
+
+.priority-row-3 {
+  background: var(--color-priority-3-bg);
+}
+
+.priority-row-4 {
+  background: var(--color-priority-4-bg);
+}
+
+.priority-row-5 {
+  background: var(--color-priority-5-bg);
 }
 
 .state-partial {

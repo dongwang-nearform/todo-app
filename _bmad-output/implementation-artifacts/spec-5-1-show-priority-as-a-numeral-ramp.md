@@ -15,13 +15,13 @@ context: ['{project-root}/_bmad-output/planning-artifacts/ux-designs/ux-bmad-exa
 
 **Problem:** The priority numeral is ink for 1 to 4 and rust only for 5. Tom cannot read the middle of the range by color, and the 5-only rule does not match the signed-off ramp in `DESIGN.md`.
 
-**Approach:** Color the numeral by its value using `priority-1` through `priority-5` from `DESIGN.md`. Change nothing else on the row.
+**Approach:** Color the numeral by its value using `priority-1` through `priority-5` from `DESIGN.md`. Fill the row with the pale `priority-N-bg` token for that value.
 
 ## Boundaries & Constraints
 
 **Always:** The numeral text is always present. Each priority value maps to one token and one class. Priority stays an integer from 1 to 5, and the API is unchanged. Row order, the Next marker, state words, and meta text are unchanged. A done or partial row keeps its priority color, because the spine colors only the title and the state word for those states.
 
-**Never:** No row fill, border, or badge from priority. No sorting by priority. No hue or token beyond `DESIGN.md`. No server, schema, or route change. No code comments that cite stories, epics, or AI workflow.
+**Never:** No priority border or badge. No sorting by priority. No use of the numeral hex as a row fill. No server, schema, or route change. No code comments that cite stories, epics, or AI workflow.
 
 </frozen-after-approval>
 
@@ -41,7 +41,7 @@ context: ['{project-root}/_bmad-output/planning-artifacts/ux-designs/ux-bmad-exa
 
 **Acceptance Criteria:**
 - Given a to-do with priority 1, 2, 3, 4, or 5, when the list renders, then the numeral shows that value with class `priority-N`.
-- Given any priority, when the row renders, then no priority-specific fill, border, or badge is applied.
+- Given any priority, when the row renders, then the row background is `priority-N-bg` and priority adds no border or badge.
 - Given a to-do with priority 5 and a to-do with priority 1, both not done, when the list renders, then row order and the Next marker are unchanged.
 - Given each of the five colors on `--color-background` for 13px label text, when the contrast is measured, then each is at least 4.5:1.
 - Given this change ships, then no route, schema, or validation changes.
@@ -63,6 +63,7 @@ context: ['{project-root}/_bmad-output/planning-artifacts/ux-designs/ux-bmad-exa
 - Baseline `888131c`. Production change: the numeral class is `priority priority-N` for every row, and `.priority-1` through `.priority-5` replace `.priority-high`.
 - Live Today list not walked: the API and Vite were not running. Phone width was not applied in the static check, so the manual phone and desktop check above is still open.
 - Priority 4 sits at 4.79:1. It passes 4.5:1, but a later token edit could drop it below.
+- 2026-11-05 follow-up: the user asked for row backgrounds. The numeral hexes cannot be the fill. Pale washes are `priority-1-bg` #F0F9FF through `priority-5-bg` #FFF7ED. The row class is `priority-row-N`. Numeral classes stay.
 
 ## Review Triage Log
 

@@ -19,8 +19,8 @@ test('renders a nested sub-to-do and the partial note', () => {
   expect(screen.getByText('partial')).toBeTruthy()
 })
 
-test('colors each priority numeral with its ramp class', () => {
-  render(
+test('colors each priority numeral and tints its row', () => {
+  const { container } = render(
     <TodoListView
       todos={[
         ...[1, 2, 3, 4, 5].map((priority) =>
@@ -38,6 +38,12 @@ test('colors each priority numeral with its ramp class', () => {
       expect(numeral.textContent).toBe(String(priority))
       expect(numeral.className).toBe(`priority priority-${priority}`)
     }
+  }
+  const rows = container.querySelectorAll('article.todo-row')
+  expect(rows.length).toBe(7)
+  for (const row of rows) {
+    const numeral = row.querySelector('.priority')
+    expect(row.classList.contains(`priority-row-${numeral?.textContent}`)).toBe(true)
   }
 })
 

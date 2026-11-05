@@ -60,7 +60,7 @@ function Row({
 }) {
   return (
     <article
-      className={depth > 0 ? 'todo-row sub' : 'todo-row'}
+      className={depth > 0 ? `todo-row sub priority-row-${todo.priority}` : `todo-row priority-row-${todo.priority}`}
       style={depth > 0 ? { marginLeft: `calc(var(--space-4) * ${depth})` } : undefined}
     >
       {onOpen ? (
