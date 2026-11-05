@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.errors import AppError
-from app.routers import copies, lists, todos, views
+from app.routers import copies, health, lists, todos, views
 
 DIST = Path(__file__).resolve().parents[2] / "web" / "dist"
 
@@ -30,6 +30,7 @@ def _detail_text(detail: object) -> str:
 
 def create_app() -> FastAPI:
     app = FastAPI(title="Todo App", docs_url=None, redoc_url=None)
+    app.include_router(health.router)
     app.include_router(lists.router)
     app.include_router(todos.router)
     app.include_router(views.router)
